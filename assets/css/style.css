@@ -1,6 +1,46 @@
 
+html{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+body{
+ 
+    height:75%;
+    width: 100%;
+}
+
+#jumbotron{
+    height: 50px;
+    background-image: linear-gradient(to right, rgba(57, 57, 166, 0), rgb(27, 17, 74));
+    color: white;
+    font-size: 35px;
+    text-align: center;
+}
+
+#enter-cities {
+    margin-right: 20px;
+    padding: 20px;
+    clear: both;
+    float: left;
+    width: 20%;
+    height: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #2589bd;
+}
+
+section{
+    background-color: rgb(149, 195, 149);
+    width: 80%;
+    height: 125px;
+    
+}
 
 .card{
     background-color: red;
-    font-size: 30px;
+    font-size: 10px;
+    width: 30px;
+    height: 30px; 
 }
+
+
