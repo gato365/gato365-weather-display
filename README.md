@@ -70,3 +70,19 @@ Below is my version's mark up. I drew it so that I can explore the tags needed f
 
 
 
+
+
+
+Learning Side of Challenge
+
+
+## Part 1: Using URL
+
+```
+// Testing URL and API Ability
+const apiKey = '726ac812a8b92daf497a98559b26b3fc'
+var urlCity = 'http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=' + apiKey;
+console.log(urlCity);
+```
+
+
