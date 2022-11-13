@@ -62,11 +62,11 @@ https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid={API k
 ## Develop HTML and CSS 
 Here is my assignment's mark up:
 
-<img src = "/assets/images/org_markup.jpg" width="25%" height="45%"> 
+<img src = "/assets/images/org_markup.jpg" width="45%" height="65%"> 
 
 Below is my version's mark up. I drew it so that I can explore the tags needed for this design. I am pretty sure I may change it in the future using DOM so that it can be more official.
 
-<img src = "/assets/images/my_markup.jpg" width="25%" height="45%"> 
+<img src = "/assets/images/my_markup.jpg" width="45%" height="65%"> 
 
 
 
