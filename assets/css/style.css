@@ -36,6 +36,13 @@ section{
     
 }
 
+
+#five-day{
+    display: flex;
+    flex-direction:  row;
+    list-style-type: none;  
+}
+
 .card{
     background-color: red;
     font-size: 10px;
