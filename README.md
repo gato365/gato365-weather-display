@@ -86,3 +86,41 @@ console.log(urlCity);
 ```
 
 
+
+## Part 2: Ability to fetch info for 1 city
+
+```
+const latInfo = 44.34;
+const lonInfo = 10.99;
+var requestUrlLL = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
+
+
+function getAPILL() {
+
+    fetch(requestUrlLL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        
+
+            // Extract Temperature
+            var temperature = data['main'].temp;
+            // Convert Temperature
+            temperature = (temperature - 273.15)*9/5 +32;
+            // Extract Wind Speed
+            var windSpeed = data['wind'].speed;
+            // Extract Humidity
+            var humidity = data['main'].humidity;
+
+            // Display Information
+            console.log(temperature);
+            console.log(windSpeed);
+            console.log(humidity);
+        });
+
+}
+```
+
+

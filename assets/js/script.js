@@ -40,12 +40,17 @@ function getAPILL() {
             console.log(data);
             // Day 0 (today) 
             var temperature = data['list'];
+
+
             console.log(temperature);
+
+            // var temperature = data['main'].temp;
             // temperature = (temperature - 273.15)*9/5 +32;
             // var windSpeed = data['wind'].speed;
             // var humidity = data['main'].humidity;
 
-            
+            var currentDay = temperature[0];
+            console.log(currentDay['main']);
             
         
         });
