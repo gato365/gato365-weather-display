@@ -10,24 +10,25 @@ var requestUrlCity = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityNam
 
 
 
-// function getAPICITY() {
+function getAPICITY() {
 
-//     fetch(requestUrlCity)
-//         .then(function (response) {
-//             return response.json();
-//         })
-//         .then(function (data) {
-//             console.log(data);
-//             console.log(data[0]);
-//             const latInfo = data[0].lat;
-//             const lonInfo = data[0].lon;
-//         });
-// }
+    fetch(requestUrlCity)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            console.log(data[0]);
+            const latInfo = data[0].lat;
+            const lonInfo = data[0].lon;
+        });
+}
 
 
 const latInfo = 44.34;
 const lonInfo = 10.99;
-var requestUrlLL = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
+// var requestUrlLL = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
+var requestUrlLL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
 
 function getAPILL() {
 
@@ -37,13 +38,15 @@ function getAPILL() {
         })
         .then(function (data) {
             console.log(data);
-            var temperature = data['main'].temp;
-            temperature = (temperature - 273.15)*9/5 +32;
-            var windSpeed = data['wind'].speed;
-            var humidity = data['main'].humidity;
-
+            // Day 0 (today) 
+            var temperature = data['list'];
             console.log(temperature);
-            //Temp, Wind, Humidity
+            // temperature = (temperature - 273.15)*9/5 +32;
+            // var windSpeed = data['wind'].speed;
+            // var humidity = data['main'].humidity;
+
+            
+            
         
         });
 
