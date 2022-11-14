@@ -44,15 +44,26 @@ function getAPILL() {
 
             console.log(temperature);
 
-            // var temperature = data['main'].temp;
-            // temperature = (temperature - 273.15)*9/5 +32;
-            // var windSpeed = data['wind'].speed;
-            // var humidity = data['main'].humidity;
 
+
+            // Control Day
             var currentDay = temperature[0];
             console.log(currentDay['main']);
-            
-        
+            // Get Relavant Information
+            var temperature = currentDay['main'].temp;
+            var windSpeed = currentDay['wind'].speed;
+            var humidity = currentDay['main'].humidity;
+            // Convert Temperature
+            temperature = (temperature - 273.15) * 9 / 5 + 32;
+
+
+
+
+            // Display Information
+            console.log(temperature);
+            console.log(windSpeed);
+            console.log(humidity); 
+
         });
 
 }
