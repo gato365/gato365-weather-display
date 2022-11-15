@@ -27,9 +27,10 @@ function getAPICITY() {
 
 const latInfo = 44.34;
 const lonInfo = 10.99;
+
 // var requestUrlLL = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
 var requestUrlLL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
-
+var cityName = 'Modena';
 function getAPILL() {
 
     fetch(requestUrlLL)
@@ -44,6 +45,8 @@ function getAPILL() {
 
 
             var fiveDayForecast = [];
+
+            // Donohue Issue 1: For each or arrow method
             for (let dayIndex = 0; dayIndex < 5; dayIndex++) {
                 const currentDay = temperature[dayIndex];
 
@@ -60,10 +63,36 @@ function getAPILL() {
             }
 
             // Display Information
-            console.log(fiveDayForecast);
+            const weatherInfo = JSON.stringify(fiveDayForecast)
+            storeCityWeather(cityName,weatherInfo);
 
         });
 }
+
+
+
+// -----------------Function Definitions--------------------
+// Author: Immanuel Williams PhD 
+// Date Created: 11/15/2022
+// Date Modified: 11/15/2022
+// Name: storeCityWeather
+// Purpose: Stores city's weather
+// Input: event,cityName,weatherInfo
+// Output: NA
+// Notes: NA
+// -----------------Function Definitions--------------------
+// function storeCityWeather(event,cityName,weatherInfo) {
+    function storeCityWeather(cityName,weatherInfo) {    
+// event.preventDefault();
+    // Set new submission to local storage 
+    localStorage.setItem("description" + cityName, weatherInfo);
+    
+    
+  
+  }
+
+// Donohue Issue 2: Local storage process of this problem (Eman Think through 11/16/2022)
+// Donohue Issue 3: Make HTML and CSS in JS, to learn (MUST Eman Think through 11/16/2022)
 
 // We need a promise based on the user
 
