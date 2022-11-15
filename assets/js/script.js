@@ -99,8 +99,6 @@ function storeCityWeather(cityName, weatherInfo) {
 // new Promise((resolve,reject) => {
 // })
 
-var info = getapi();
-
 
 
 
@@ -160,4 +158,6 @@ function getapi() {
         });
 }
 
+
+var info = getapi();
 
