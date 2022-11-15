@@ -64,7 +64,7 @@ function getAPILL() {
 
             // Display Information
             const weatherInfo = JSON.stringify(fiveDayForecast)
-            storeCityWeather(cityName,weatherInfo);
+            storeCityWeather(cityName, weatherInfo);
 
         });
 }
@@ -82,14 +82,14 @@ function getAPILL() {
 // Notes: NA
 // -----------------Function Definitions--------------------
 // function storeCityWeather(event,cityName,weatherInfo) {
-    function storeCityWeather(cityName,weatherInfo) {    
-// event.preventDefault();
+function storeCityWeather(cityName, weatherInfo) {
+    // event.preventDefault();
     // Set new submission to local storage 
     localStorage.setItem("description" + cityName, weatherInfo);
-    
-    
-  
-  }
+
+
+
+}
 
 // Donohue Issue 2: Local storage process of this problem (Eman Think through 11/16/2022)
 // Donohue Issue 3: Make HTML and CSS in JS, to learn (MUST Eman Think through 11/16/2022)
@@ -99,4 +99,65 @@ function getAPILL() {
 // new Promise((resolve,reject) => {
 // })
 
-var info = getAPILL();
+var info = getapi();
+
+
+
+
+
+var requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=' + apiKey;
+function getapi() {
+
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            // console.log(data);
+            // console.log(data[0]);
+            const latInfo = data[0].lat;
+            const lonInfo = data[0].lon;
+            var requestUrlLL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
+
+
+
+            fetch(requestUrlLL)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+
+                    // Day 0 (today) 
+                    var temperature = data['list'];
+                    // console.log(temperature);
+
+
+                    var fiveDayForecast = [];
+
+                    // Donohue Issue 1: For each or arrow method
+                    for (let dayIndex = 0; dayIndex < 5; dayIndex++) {
+                        const currentDay = temperature[dayIndex];
+
+
+                        // Get Relavant Information
+                        const oneDayForecast = {
+                            d: currentDay.dt,
+                            t: ((currentDay['main'].temp - 273.15) * 9 / 5 + 32).toFixed(2),
+                            ws: currentDay['wind'].speed,
+                            h: currentDay['main'].humidity
+                        }
+                        fiveDayForecast = fiveDayForecast.concat(oneDayForecast);
+
+                    }
+
+                    // Display Information
+                    const weatherInfo = JSON.stringify(fiveDayForecast)
+                    storeCityWeather(cityName, weatherInfo);
+
+                });
+
+
+        });
+}
+
+
