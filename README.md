@@ -123,4 +123,45 @@ function getAPILL() {
 }
 ```
 
+## Part 3: Ability to fetch info for 1 city for multiple days
 
+```
+var requestUrlLL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
+
+
+function getAPILL() {
+
+    fetch(requestUrlLL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+
+            // Day 0 (today) 
+            var temperature = data['list'];
+            // console.log(temperature);
+
+
+            var fiveDayForecast = [];
+            for (let dayIndex = 0; dayIndex < 5; dayIndex++) {
+                const currentDay = temperature[dayIndex];
+
+
+                // Get Relavant Information
+                const oneDayForecast = {
+                    d: currentDay.dt,
+                    t: ((currentDay['main'].temp - 273.15) * 9 / 5 + 32).toFixed(2),
+                    ws: currentDay['wind'].speed,
+                    h: currentDay['main'].humidity
+                }
+                fiveDayForecast = fiveDayForecast.concat(oneDayForecast);
+
+            }
+
+            // Display Information
+            console.log(fiveDayForecast);
+
+        });
+}
+
+```

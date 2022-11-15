@@ -17,8 +17,8 @@ function getAPICITY() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-            console.log(data[0]);
+            // console.log(data);
+            // console.log(data[0]);
             const latInfo = data[0].lat;
             const lonInfo = data[0].lon;
         });
@@ -37,35 +37,32 @@ function getAPILL() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
+
             // Day 0 (today) 
             var temperature = data['list'];
+            // console.log(temperature);
 
 
-            console.log(temperature);
+            var fiveDayForecast = [];
+            for (let dayIndex = 0; dayIndex < 5; dayIndex++) {
+                const currentDay = temperature[dayIndex];
 
 
+                // Get Relavant Information
+                const oneDayForecast = {
+                    d: currentDay.dt,
+                    t: ((currentDay['main'].temp - 273.15) * 9 / 5 + 32).toFixed(2),
+                    ws: currentDay['wind'].speed,
+                    h: currentDay['main'].humidity
+                }
+                fiveDayForecast = fiveDayForecast.concat(oneDayForecast);
 
-            // Control Day
-            var currentDay = temperature[0];
-            console.log(currentDay['main']);
-            // Get Relavant Information
-            var temperature = currentDay['main'].temp;
-            var windSpeed = currentDay['wind'].speed;
-            var humidity = currentDay['main'].humidity;
-            // Convert Temperature
-            temperature = (temperature - 273.15) * 9 / 5 + 32;
-
-
-
+            }
 
             // Display Information
-            console.log(temperature);
-            console.log(windSpeed);
-            console.log(humidity); 
+            console.log(fiveDayForecast);
 
         });
-
 }
 
 // We need a promise based on the user
@@ -74,4 +71,3 @@ function getAPILL() {
 // })
 
 var info = getAPILL();
-console.log(info);
