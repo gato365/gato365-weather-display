@@ -4,73 +4,10 @@
 
 // Testing URL and API Ability
 const apiKey = '726ac812a8b92daf497a98559b26b3fc'
-
 var tmpcityName = document.querySelector('#cityName');
 var tmpsubmitBtn = document.querySelector('#submitBtn');
 var cityName;
-var requestUrlCity = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=' + apiKey;
-// console.log(requestUrlCity);
-
-
-
-function getAPICITY() {
-
-    fetch(requestUrlCity)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            // console.log(data);
-            // console.log(data[0]);
-            const latInfo = data[0].lat;
-            const lonInfo = data[0].lon;
-        });
-}
-
-
-const latInfo = 44.34;
-const lonInfo = 10.99;
-
-// var requestUrlLL = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
-var requestUrlLL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
-var cityName = 'Modena';
-function getAPILL() {
-
-    fetch(requestUrlLL)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-
-            // Day 0 (today) 
-            var temperature = data['list'];
-            // console.log(temperature);
-
-
-            var fiveDayForecast = [];
-
-            // Donohue Issue 1: For each or arrow method
-            for (let dayIndex = 0; dayIndex < 5; dayIndex++) {
-                const currentDay = temperature[dayIndex];
-
-
-                // Get Relavant Information
-                const oneDayForecast = {
-                    d: currentDay.dt,
-                    t: ((currentDay['main'].temp - 273.15) * 9 / 5 + 32).toFixed(2),
-                    ws: currentDay['wind'].speed,
-                    h: currentDay['main'].humidity
-                }
-                fiveDayForecast = fiveDayForecast.concat(oneDayForecast);
-
-            }
-
-            // Display Information
-            const weatherInfo = JSON.stringify(fiveDayForecast)
-            storeCityWeather(cityName, weatherInfo);
-
-        });
-}
+var requestUrl;
 
 
 
@@ -105,28 +42,38 @@ function storeCityWeather(cityName, weatherInfo) {
 
 tmpsubmitBtn.addEventListener("click", function () {
     cityName = tmpcityName.value;
-    
+    console.log(cityName);
+    requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=' + apiKey;
+    getapi();
 });
-console.log(cityName);
 
-var requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=' + apiKey;
+
+
 function getapi() {
     var fiveDayForecast = [];
     fetch(requestUrl)
+
+
         .then(function (response) {
+            // Check for Error
+            if (!response.ok) {
+                throw response.json();
+            }
+            // Return JSON text
             return response.json();
         })
         .then(function (data) {
-            // console.log(data);
-            // console.log(data[0]);
+        
+            // Gets Lat and Long from data
             const latInfo = data[0].lat;
             const lonInfo = data[0].lon;
+            // Creates URL LL
             var requestUrlLL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
 
 
 
             fetch(requestUrlLL)
-            
+
                 .then(function (response) {
                     return response.json();
                 })
@@ -135,9 +82,6 @@ function getapi() {
                     // Day 0 (today) 
                     var temperature = data['list'];
                     // console.log(temperature);
-
-
-                    
 
                     // Donohue Issue 1: For each or arrow method
                     for (let dayIndex = 0; dayIndex < 5; dayIndex++) {
@@ -163,10 +107,10 @@ function getapi() {
 
 
         });
-        return fiveDayForecast;
+
+    return fiveDayForecast;
 }
 
 
-var info = getapi();
-console.log(info);
+
 
