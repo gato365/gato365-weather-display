@@ -8,6 +8,7 @@ var tmpcityName = document.querySelector('#cityName');
 var tmpsubmitBtn = document.querySelector('#submitBtn');
 var cityName;
 var requestUrl;
+var day0 = document.querySelector('#day-0');
 
 
 
@@ -43,10 +44,29 @@ function storeCityWeather(cityName, weatherInfo) {
 tmpsubmitBtn.addEventListener("click", function () {
     cityName = tmpcityName.value;
     console.log(cityName);
+    day0.innerHTML = cityName;
+   
+   // Copy Paste 6 times
+    const info = day0.nextElementSibling;
+    
+    info.children[0].innerHTML = 'Temp--';
+    info.children[1].innerHTML = 'Wind--';
+    info.children[2].innerHTML = 'Humidity--';
+
     requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=' + apiKey;
     getapi();
+    
 });
 
+
+function updateDayInfo(info,ts,ws,hu){
+
+    info.children[0].innerHTML = 'Temp:' + ts;
+    info.children[1].innerHTML = 'Wind:' + ts;
+    info.children[2].innerHTML = 'Humidity:' + hu;
+    
+
+}
 
 
 function getapi() {
@@ -84,7 +104,7 @@ function getapi() {
                     // console.log(temperature);
 
                     // Donohue Issue 1: For each or arrow method
-                    for (let dayIndex = 0; dayIndex < 5; dayIndex++) {
+                    for (let dayIndex = 0; dayIndex < 6; dayIndex++) {
                         const currentDay = temperature[dayIndex];
 
 
