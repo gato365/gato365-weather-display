@@ -4,7 +4,10 @@
 
 // Testing URL and API Ability
 const apiKey = '726ac812a8b92daf497a98559b26b3fc'
-var cityName = 'London'
+
+var tmpcityName = document.querySelector('#cityName');
+var tmpsubmitBtn = document.querySelector('#submitBtn');
+var cityName;
 var requestUrlCity = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=' + apiKey;
 // console.log(requestUrlCity);
 
@@ -100,12 +103,15 @@ function storeCityWeather(cityName, weatherInfo) {
 // })
 
 
-
-
+tmpsubmitBtn.addEventListener("click", function () {
+    cityName = tmpcityName.value;
+    
+});
+console.log(cityName);
 
 var requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=' + apiKey;
 function getapi() {
-
+    var fiveDayForecast = [];
     fetch(requestUrl)
         .then(function (response) {
             return response.json();
@@ -120,6 +126,7 @@ function getapi() {
 
 
             fetch(requestUrlLL)
+            
                 .then(function (response) {
                     return response.json();
                 })
@@ -130,7 +137,7 @@ function getapi() {
                     // console.log(temperature);
 
 
-                    var fiveDayForecast = [];
+                    
 
                     // Donohue Issue 1: For each or arrow method
                     for (let dayIndex = 0; dayIndex < 5; dayIndex++) {
@@ -156,8 +163,10 @@ function getapi() {
 
 
         });
+        return fiveDayForecast;
 }
 
 
 var info = getapi();
+console.log(info);
 
