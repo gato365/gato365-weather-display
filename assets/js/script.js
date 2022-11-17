@@ -66,46 +66,49 @@ tmpsubmitBtn.addEventListener("click", function () {
     var cityInfoJSON = JSON.parse(cityInfoString);
     console.log(cityInfoJSON);
 
+
+    console.log();
+
     // I will refractor this
     // Day 0
     const info0 = day0.nextElementSibling;
-    info0.children[0].innerHTML = 'Temp--';
-    info0.children[1].innerHTML = 'Wind--';
-    info0.children[2].innerHTML = 'Humidity--';
+    info0.children[0].innerHTML = 'Temp--' + cityInfoJSON[0].t;
+    info0.children[1].innerHTML = 'Wind--' + cityInfoJSON[0].ws;
+    info0.children[2].innerHTML = 'Humidity--' + cityInfoJSON[0].h;
 
 
     // Day 1
     const info1 = day1.children[0];
-    info1.children[0].innerHTML = 'Temp--';
-    info1.children[1].innerHTML = 'Wind--';
-    info1.children[2].innerHTML = 'Humidity--';
+    info1.children[0].innerHTML = 'Temp--' + cityInfoJSON[1].t;
+    info1.children[1].innerHTML = 'Wind--'+ cityInfoJSON[1].ws;
+    info1.children[2].innerHTML = 'Humidity--' + cityInfoJSON[1].h;
 
 
     // Day 2
     const info2 = day2.children[0];
-    info2.children[0].innerHTML = 'Temp--';
-    info2.children[1].innerHTML = 'Wind--';
-    info2.children[2].innerHTML = 'Humidity--';
+    info2.children[0].innerHTML = 'Temp--' + cityInfoJSON[2].t;
+    info2.children[1].innerHTML = 'Wind--'+ cityInfoJSON[2].ws;
+    info2.children[2].innerHTML = 'Humidity--' + cityInfoJSON[2].h;
 
 
     // Day 3
     const info3 = day3.children[0];
-    info3.children[0].innerHTML = 'Temp--';
-    info3.children[1].innerHTML = 'Wind--';
-    info3.children[2].innerHTML = 'Humidity--';
+    info3.children[0].innerHTML = 'Temp--' + cityInfoJSON[3].t;
+    info3.children[1].innerHTML = 'Wind--'+ cityInfoJSON[3].ws;
+    info3.children[2].innerHTML = 'Humidity--' + cityInfoJSON[3].h;
 
     // Day 4
     const info4 = day4.children[0];
-    info4.children[0].innerHTML = 'Temp--';
-    info4.children[1].innerHTML = 'Wind--';
-    info4.children[2].innerHTML = 'Humidity--';
+    info4.children[0].innerHTML = 'Temp--' + cityInfoJSON[4].t;
+    info4.children[1].innerHTML = 'Wind--'+ cityInfoJSON[4].ws;
+    info4.children[2].innerHTML = 'Humidity--' + cityInfoJSON[4].h;
 
 
     // Day 5
     const info5 = day5.children[0];
-    info5.children[0].innerHTML = 'Temp--';
-    info5.children[1].innerHTML = 'Wind--';
-    info5.children[2].innerHTML = 'Humidity--';
+    info5.children[0].innerHTML = 'Temp--' + cityInfoJSON[5].t;
+    info5.children[1].innerHTML = 'Wind--'+ cityInfoJSON[5].ws;
+    info5.children[2].innerHTML = 'Humidity--' + cityInfoJSON[5].h;
 
 });
 
