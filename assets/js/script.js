@@ -5,7 +5,7 @@
 // Testing URL and API Ability
 const apiKey = '726ac812a8b92daf497a98559b26b3fc'
 var tmpcityName = document.querySelector('#cityName');
-var tmpsubmitBtn = document.querySelector('#submitBtn');
+var submitBtn = document.querySelector('#submitBtn');
 var cityName;
 var requestUrl;
 var fiveDayForecast = [];
@@ -30,24 +30,23 @@ var day5 = document.querySelector('#day-5');
 // -----------------Function Definitions--------------------
 // function storeCityWeather(event,cityName,weatherInfo) {
 function storeCityWeather(cityName, weatherInfo) {
-    // event.preventDefault();
     // Set new submission to local storage 
     localStorage.setItem("description" + cityName, weatherInfo);
 
-
-
 }
 
-// Donohue Issue 2: Local storage process of this problem (Eman Think through 11/16/2022)
-// Donohue Issue 3: Make HTML and CSS in JS, to learn (MUST Eman Think through 11/16/2022)
 
-// We need a promise based on the user
-
-// new Promise((resolve,reject) => {
-// })
-
-
-tmpsubmitBtn.addEventListener("click", function () {
+// -----------------Function Definitions--------------------
+// Author: Immanuel Williams PhD 
+// Date Created: 11/16/2022
+// Date Modified: 11/16/2022
+// Name: submitBtn
+// Purpose: Button Gets City info from User 
+// Input: (Click)
+// Output: NA
+// Notes: NA
+// -----------------Function Definitions--------------------
+submitBtn.addEventListener("click", function () {
     cityName = tmpcityName.value;
     console.log(cityName);
     day0.innerHTML = cityName;
@@ -55,33 +54,32 @@ tmpsubmitBtn.addEventListener("click", function () {
     getapi()
 });
 
-var currentDay;
 
+// -----------------Function Definitions--------------------
+// Author: Immanuel Williams PhD 
+// Date Created: 11/17/2022
+// Date Modified: 11/17/2022
+// Name: inputDayInfo
+// Purpose: Input info in the right format from local storage
+// Input: currentDay, currentWeather, isCurrentDay
+// Output: NA
+// Notes: NA
+// -----------------Function Definitions--------------------
 function inputDayInfo(currentDay, currentWeather, isCurrentDay) {
-
-
-
-
-
-
+    // Current Day Input data
     if (isCurrentDay === true) {
         var currentDay = currentDay.nextElementSibling;
         currentDay.children[0].innerHTML = 'Temp: ' + currentWeather.t;
         currentDay.children[1].innerHTML = 'Wind: ' + currentWeather.ws;
         currentDay.children[2].innerHTML = 'Humidity: ' + currentWeather.h;
-
-
-
-    } else if (isCurrentDay === false) {
-
-
+        currentDay.children[3].innerHTML = 'Weather: ' + currentWeather.weather;
+    } else if (isCurrentDay === false) { // Five-Forecast Input Data
         var currentDay = currentDay.children[0];
-        
-
         currentDay.children[0].innerHTML = 'Temp: ' + currentWeather.t;
         currentDay.children[1].innerHTML = 'Wind: ' + currentWeather.ws;
         currentDay.children[2].innerHTML = 'Humidity: ' + currentWeather.h;
-
+        currentDay.children[3].innerHTML = 'Weather: ' + currentWeather.weather;
+        // Add Image based on predicted weather
         if (['thunderstorm', 'rain', 'snow', 'clouds', 'fog'].includes(currentWeather.weather)) {
             currentDay.style.backgroundImage =
                 `url('https://mdbgo.io/ascensus/mdb-advanced/img/${currentWeather.weather}.gif')`;
@@ -89,33 +87,42 @@ function inputDayInfo(currentDay, currentWeather, isCurrentDay) {
             currentDay.style.backgroundImage =
                 `url('https://mdbgo.io/ascensus/mdb-advanced/img/clear.gif')`;
         }
-
-
     }
 }
 
+
+// -----------------Function Definitions--------------------
+// Author: Immanuel Williams PhD 
+// Date Created: 11/16/2022
+// Date Modified: 11/16/2022
+// Name: htmlDOMManipulation
+// Purpose: Changes the html based on city's data
+// Input: 
+// Output: NA
+// Notes: NA
+// -----------------Function Definitions--------------------
 function htmlDOMManipulation() {
-    // Copy Paste 6 times
-
-
     var cityInfoString = localStorage.getItem('description' + cityName);
     var cityInfoJSON = JSON.parse(cityInfoString);
-
-
-
-
-    // I will refractor this
-    // Day 0
-
     inputDayInfo(day0, cityInfoJSON[0], true);
     inputDayInfo(day1, cityInfoJSON[1], false);
     inputDayInfo(day2, cityInfoJSON[2], false);
     inputDayInfo(day3, cityInfoJSON[3], false);
     inputDayInfo(day4, cityInfoJSON[4], false);
     inputDayInfo(day5, cityInfoJSON[5], false);
-
 }
 
+
+// -----------------Function Definitions--------------------
+// Author: Immanuel Williams PhD 
+// Date Created: 11/15/2022
+// Date Modified: 11/15/2022
+// Name: getapi
+// Purpose: Gets Information from Open Weather based on user's city inpu
+// Input: NA
+// Output: NA
+// Notes: NA
+// -----------------Function Definitions--------------------
 function getapi() {
 
     fetch(requestUrl)
@@ -157,7 +164,7 @@ function getapi() {
 
                         // Get Relavant Information
                         const oneDayForecast = {
-                            d: moment.toDate(currentDay.dt),
+                            d: currentDay.dt,
                             t: ((currentDay['main'].temp - 273.15) * 9 / 5 + 32).toFixed(2),
                             ws: currentDay['wind'].speed,
                             h: currentDay['main'].humidity,
@@ -165,6 +172,8 @@ function getapi() {
                         }
                         fiveDayForecast = fiveDayForecast.concat(oneDayForecast);
 
+
+                        console.log(oneDayForecast);
                     }
 
 
@@ -180,6 +189,7 @@ function getapi() {
 
 
 }
+
 
 
 
