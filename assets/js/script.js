@@ -82,10 +82,11 @@ var currentWeather;
 function gifBackground(currentDay,currentWeather) {
 
 
-
-    currentDay.children[0].innerHTML = 'Temp--' + cityInfoJSON[0].t;
-    currentDay.children[1].innerHTML = 'Wind--' + cityInfoJSON[0].ws;
-    currentDay.children[2].innerHTML = 'Humidity--' + cityInfoJSON[0].h;
+    var currentDay = currentDay.children[0];
+    
+    currentDay.children[0].innerHTML = 'Temp--' + currentWeather.t;
+    currentDay.children[1].innerHTML = 'Wind--' + currentWeather.ws;
+    currentDay.children[2].innerHTML = 'Humidity--' + currentWeather.h;
 
     if (['thunderstorm', 'rain','snow', 'clouds', 'fog'].includes(currentWeather.weather)) {
         currentDay.style.backgroundImage =
@@ -119,38 +120,40 @@ function htmlDOMManipulation() {
    
    
        // Day 1
-       const info1 = day1.children[0];
-       info1.children[0].innerHTML = 'Temp--' + cityInfoJSON[1].t;
-       info1.children[1].innerHTML = 'Wind--' + cityInfoJSON[1].ws;
-       info1.children[2].innerHTML = 'Humidity--' + cityInfoJSON[1].h;
+    //    const info1 = day1.children[0];
+    //    info1.children[0].innerHTML = 'Temp--' + cityInfoJSON[1].t;
+    //    info1.children[1].innerHTML = 'Wind--' + cityInfoJSON[1].ws;
+    //    info1.children[2].innerHTML = 'Humidity--' + cityInfoJSON[1].h;
        gifBackground(day1,cityInfoJSON[1]);
    
        // Day 2
-       const info2 = day2.children[0];
-       info2.children[0].innerHTML = 'Temp--' + cityInfoJSON[2].t;
-       info2.children[1].innerHTML = 'Wind--' + cityInfoJSON[2].ws;
-       info2.children[2].innerHTML = 'Humidity--' + cityInfoJSON[2].h;
+    //    const info2 = day2.children[0];
+    //    info2.children[0].innerHTML = 'Temp--' + cityInfoJSON[2].t;
+    //    info2.children[1].innerHTML = 'Wind--' + cityInfoJSON[2].ws;
+    //    info2.children[2].innerHTML = 'Humidity--' + cityInfoJSON[2].h;
        gifBackground(day2,cityInfoJSON[2]);
    
        // Day 3
-       const info3 = day3.children[0];
-       info3.children[0].innerHTML = 'Temp--' + cityInfoJSON[3].t;
-       info3.children[1].innerHTML = 'Wind--' + cityInfoJSON[3].ws;
-       info3.children[2].innerHTML = 'Humidity--' + cityInfoJSON[3].h;
-       gifBackground(day3,cityInfoJSON[3].weather);
+    //    const info3 = day3.children[0];
+    //    info3.children[0].innerHTML = 'Temp--' + cityInfoJSON[3].t;
+    //    info3.children[1].innerHTML = 'Wind--' + cityInfoJSON[3].ws;
+    //    info3.children[2].innerHTML = 'Humidity--' + cityInfoJSON[3].h;
+       gifBackground(day3,cityInfoJSON[3]);
+
+
        // Day 4
-       const info4 = day4.children[0];
-       info4.children[0].innerHTML = 'Temp--' + cityInfoJSON[4].t;
-       info4.children[1].innerHTML = 'Wind--' + cityInfoJSON[4].ws;
-       info4.children[2].innerHTML = 'Humidity--' + cityInfoJSON[4].h;
-       gifBackground(day4,cityInfoJSON[4].weather);
+    //    const info4 = day4.children[0];
+    //    info4.children[0].innerHTML = 'Temp--' + cityInfoJSON[4].t;
+    //    info4.children[1].innerHTML = 'Wind--' + cityInfoJSON[4].ws;
+    //    info4.children[2].innerHTML = 'Humidity--' + cityInfoJSON[4].h;
+       gifBackground(day4,cityInfoJSON[4]);
    
        // Day 5
-       const info5 = day5.children[0];
-       info5.children[0].innerHTML = 'Temp--' + cityInfoJSON[5].t;
-       info5.children[1].innerHTML = 'Wind--' + cityInfoJSON[5].ws;
-       info5.children[2].innerHTML = 'Humidity--' + cityInfoJSON[5].h;
-       gifBackground(day5,cityInfoJSON[5].weather);
+    //    const info5 = day5.children[0];
+    //    info5.children[0].innerHTML = 'Temp--' + cityInfoJSON[5].t;
+    //    info5.children[1].innerHTML = 'Wind--' + cityInfoJSON[5].ws;
+    //    info5.children[2].innerHTML = 'Humidity--' + cityInfoJSON[5].h;
+       gifBackground(day5,cityInfoJSON[5]);
    
 }
 
