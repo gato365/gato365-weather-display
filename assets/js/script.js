@@ -57,58 +57,12 @@ tmpsubmitBtn.addEventListener("click", function () {
 
 
     requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=' + apiKey;
-    getapi();
-
-    // Copy Paste 6 times
+    getapi()
 
 
-    var cityInfoString = localStorage.getItem('description' + cityName);
-    var cityInfoJSON = JSON.parse(cityInfoString);
-    console.log(cityInfoJSON);
 
+ 
 
-    console.log();
-
-    // I will refractor this
-    // Day 0
-    const info0 = day0.nextElementSibling;
-    info0.children[0].innerHTML = 'Temp--' + cityInfoJSON[0].t;
-    info0.children[1].innerHTML = 'Wind--' + cityInfoJSON[0].ws;
-    info0.children[2].innerHTML = 'Humidity--' + cityInfoJSON[0].h;
-
-
-    // Day 1
-    const info1 = day1.children[0];
-    info1.children[0].innerHTML = 'Temp--' + cityInfoJSON[1].t;
-    info1.children[1].innerHTML = 'Wind--'+ cityInfoJSON[1].ws;
-    info1.children[2].innerHTML = 'Humidity--' + cityInfoJSON[1].h;
-
-
-    // Day 2
-    const info2 = day2.children[0];
-    info2.children[0].innerHTML = 'Temp--' + cityInfoJSON[2].t;
-    info2.children[1].innerHTML = 'Wind--'+ cityInfoJSON[2].ws;
-    info2.children[2].innerHTML = 'Humidity--' + cityInfoJSON[2].h;
-
-
-    // Day 3
-    const info3 = day3.children[0];
-    info3.children[0].innerHTML = 'Temp--' + cityInfoJSON[3].t;
-    info3.children[1].innerHTML = 'Wind--'+ cityInfoJSON[3].ws;
-    info3.children[2].innerHTML = 'Humidity--' + cityInfoJSON[3].h;
-
-    // Day 4
-    const info4 = day4.children[0];
-    info4.children[0].innerHTML = 'Temp--' + cityInfoJSON[4].t;
-    info4.children[1].innerHTML = 'Wind--'+ cityInfoJSON[4].ws;
-    info4.children[2].innerHTML = 'Humidity--' + cityInfoJSON[4].h;
-
-
-    // Day 5
-    const info5 = day5.children[0];
-    info5.children[0].innerHTML = 'Temp--' + cityInfoJSON[5].t;
-    info5.children[1].innerHTML = 'Wind--'+ cityInfoJSON[5].ws;
-    info5.children[2].innerHTML = 'Humidity--' + cityInfoJSON[5].h;
 
 });
 
@@ -123,7 +77,82 @@ tmpsubmitBtn.addEventListener("click", function () {
 // }
 
 
+var currentWeather;
 
+function gifBackground(currentDay,currentWeather) {
+
+
+
+    currentDay.children[0].innerHTML = 'Temp--' + cityInfoJSON[0].t;
+    currentDay.children[1].innerHTML = 'Wind--' + cityInfoJSON[0].ws;
+    currentDay.children[2].innerHTML = 'Humidity--' + cityInfoJSON[0].h;
+
+    if (['thunderstorm', 'rain','snow', 'clouds', 'fog'].includes(currentWeather.weather)) {
+        currentDay.style.backgroundImage =
+            `url('https://mdbgo.io/ascensus/mdb-advanced/img/${currentWeather.weather}.gif')`;
+    } else{
+        currentDay.style.backgroundImage =
+        `url('https://mdbgo.io/ascensus/mdb-advanced/img/clear.gif')`;
+    }
+
+}
+
+function htmlDOMManipulation() {
+       // Copy Paste 6 times
+
+
+       var cityInfoString = localStorage.getItem('description' + cityName);
+       var cityInfoJSON = JSON.parse(cityInfoString);
+       console.log(cityInfoJSON);
+   
+   
+   
+   
+       // I will refractor this
+       // Day 0
+   
+       const info0 = day0.nextElementSibling;
+       console.log(info0)
+       info0.children[0].innerHTML = 'Temp--' + cityInfoJSON[0].t;
+       info0.children[1].innerHTML = 'Wind--' + cityInfoJSON[0].ws;
+       info0.children[2].innerHTML = 'Humidity--' + cityInfoJSON[0].h;
+   
+   
+       // Day 1
+       const info1 = day1.children[0];
+       info1.children[0].innerHTML = 'Temp--' + cityInfoJSON[1].t;
+       info1.children[1].innerHTML = 'Wind--' + cityInfoJSON[1].ws;
+       info1.children[2].innerHTML = 'Humidity--' + cityInfoJSON[1].h;
+       gifBackground(day1,cityInfoJSON[1]);
+   
+       // Day 2
+       const info2 = day2.children[0];
+       info2.children[0].innerHTML = 'Temp--' + cityInfoJSON[2].t;
+       info2.children[1].innerHTML = 'Wind--' + cityInfoJSON[2].ws;
+       info2.children[2].innerHTML = 'Humidity--' + cityInfoJSON[2].h;
+       gifBackground(day2,cityInfoJSON[2]);
+   
+       // Day 3
+       const info3 = day3.children[0];
+       info3.children[0].innerHTML = 'Temp--' + cityInfoJSON[3].t;
+       info3.children[1].innerHTML = 'Wind--' + cityInfoJSON[3].ws;
+       info3.children[2].innerHTML = 'Humidity--' + cityInfoJSON[3].h;
+       gifBackground(day3,cityInfoJSON[3].weather);
+       // Day 4
+       const info4 = day4.children[0];
+       info4.children[0].innerHTML = 'Temp--' + cityInfoJSON[4].t;
+       info4.children[1].innerHTML = 'Wind--' + cityInfoJSON[4].ws;
+       info4.children[2].innerHTML = 'Humidity--' + cityInfoJSON[4].h;
+       gifBackground(day4,cityInfoJSON[4].weather);
+   
+       // Day 5
+       const info5 = day5.children[0];
+       info5.children[0].innerHTML = 'Temp--' + cityInfoJSON[5].t;
+       info5.children[1].innerHTML = 'Wind--' + cityInfoJSON[5].ws;
+       info5.children[2].innerHTML = 'Humidity--' + cityInfoJSON[5].h;
+       gifBackground(day5,cityInfoJSON[5].weather);
+   
+}
 
 function getapi() {
 
@@ -143,6 +172,7 @@ function getapi() {
             // Gets Lat and Long from data
             const latInfo = data[0].lat;
             const lonInfo = data[0].lon;
+
             // Creates URL LL
             var requestUrlLL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
 
@@ -154,10 +184,9 @@ function getapi() {
                     return response.json();
                 })
                 .then(function (data) {
-
                     // Day 0 (today) 
                     var temperature = data['list'];
-                    // console.log(temperature);
+                    console.log(temperature);
 
                     // Donohue Issue 1: For each or arrow method
                     for (let dayIndex = 0; dayIndex < 6; dayIndex++) {
@@ -169,16 +198,20 @@ function getapi() {
                             d: currentDay.dt,
                             t: ((currentDay['main'].temp - 273.15) * 9 / 5 + 32).toFixed(2),
                             ws: currentDay['wind'].speed,
-                            h: currentDay['main'].humidity
+                            h: currentDay['main'].humidity,
+                            weather: currentDay['weather'][0].main.toLowerCase()
                         }
                         fiveDayForecast = fiveDayForecast.concat(oneDayForecast);
 
+
+                        console.log(currentDay['weather']);
                     }
 
-                    // console.log(fiveDayForecast);
+                    console.log(fiveDayForecast);
                     // Display Information
                     const weatherInfo = JSON.stringify(fiveDayForecast)
                     storeCityWeather(cityName, weatherInfo);
+                    htmlDOMManipulation()
 
                 });
 
