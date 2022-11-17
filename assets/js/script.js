@@ -51,110 +51,69 @@ tmpsubmitBtn.addEventListener("click", function () {
     cityName = tmpcityName.value;
     console.log(cityName);
     day0.innerHTML = cityName;
-
-
-
-
-
     requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=' + apiKey;
     getapi()
-
-
-
- 
-
-
 });
 
+var currentDay;
 
-// function updateDayInfo(info,ts,ws,hu){
-
-//     info.children[0].innerHTML = 'Temp:' + ts;
-//     info.children[1].innerHTML = 'Wind:' + ts;
-//     info.children[2].innerHTML = 'Humidity:' + hu;
+function inputDayInfo(currentDay, currentWeather, isCurrentDay) {
 
 
-// }
 
 
-var currentWeather;
-
-function gifBackground(currentDay,currentWeather) {
 
 
-    var currentDay = currentDay.children[0];
-    
-    currentDay.children[0].innerHTML = 'Temp--' + currentWeather.t;
-    currentDay.children[1].innerHTML = 'Wind--' + currentWeather.ws;
-    currentDay.children[2].innerHTML = 'Humidity--' + currentWeather.h;
+    if (isCurrentDay === true) {
+        var currentDay = currentDay.nextElementSibling;
+        currentDay.children[0].innerHTML = 'Temp: ' + currentWeather.t;
+        currentDay.children[1].innerHTML = 'Wind: ' + currentWeather.ws;
+        currentDay.children[2].innerHTML = 'Humidity: ' + currentWeather.h;
 
-    if (['thunderstorm', 'rain','snow', 'clouds', 'fog'].includes(currentWeather.weather)) {
-        currentDay.style.backgroundImage =
-            `url('https://mdbgo.io/ascensus/mdb-advanced/img/${currentWeather.weather}.gif')`;
-    } else{
-        currentDay.style.backgroundImage =
-        `url('https://mdbgo.io/ascensus/mdb-advanced/img/clear.gif')`;
+
+
+    } else if (isCurrentDay === false) {
+
+
+        var currentDay = currentDay.children[0];
+        
+
+        currentDay.children[0].innerHTML = 'Temp: ' + currentWeather.t;
+        currentDay.children[1].innerHTML = 'Wind: ' + currentWeather.ws;
+        currentDay.children[2].innerHTML = 'Humidity: ' + currentWeather.h;
+
+        if (['thunderstorm', 'rain', 'snow', 'clouds', 'fog'].includes(currentWeather.weather)) {
+            currentDay.style.backgroundImage =
+                `url('https://mdbgo.io/ascensus/mdb-advanced/img/${currentWeather.weather}.gif')`;
+        } else {
+            currentDay.style.backgroundImage =
+                `url('https://mdbgo.io/ascensus/mdb-advanced/img/clear.gif')`;
+        }
+
+
     }
-
 }
 
 function htmlDOMManipulation() {
-       // Copy Paste 6 times
+    // Copy Paste 6 times
 
 
-       var cityInfoString = localStorage.getItem('description' + cityName);
-       var cityInfoJSON = JSON.parse(cityInfoString);
-       console.log(cityInfoJSON);
-   
-   
-   
-   
-       // I will refractor this
-       // Day 0
-   
-       const info0 = day0.nextElementSibling;
-       console.log(info0)
-       info0.children[0].innerHTML = 'Temp--' + cityInfoJSON[0].t;
-       info0.children[1].innerHTML = 'Wind--' + cityInfoJSON[0].ws;
-       info0.children[2].innerHTML = 'Humidity--' + cityInfoJSON[0].h;
-   
-   
-       // Day 1
-    //    const info1 = day1.children[0];
-    //    info1.children[0].innerHTML = 'Temp--' + cityInfoJSON[1].t;
-    //    info1.children[1].innerHTML = 'Wind--' + cityInfoJSON[1].ws;
-    //    info1.children[2].innerHTML = 'Humidity--' + cityInfoJSON[1].h;
-       gifBackground(day1,cityInfoJSON[1]);
-   
-       // Day 2
-    //    const info2 = day2.children[0];
-    //    info2.children[0].innerHTML = 'Temp--' + cityInfoJSON[2].t;
-    //    info2.children[1].innerHTML = 'Wind--' + cityInfoJSON[2].ws;
-    //    info2.children[2].innerHTML = 'Humidity--' + cityInfoJSON[2].h;
-       gifBackground(day2,cityInfoJSON[2]);
-   
-       // Day 3
-    //    const info3 = day3.children[0];
-    //    info3.children[0].innerHTML = 'Temp--' + cityInfoJSON[3].t;
-    //    info3.children[1].innerHTML = 'Wind--' + cityInfoJSON[3].ws;
-    //    info3.children[2].innerHTML = 'Humidity--' + cityInfoJSON[3].h;
-       gifBackground(day3,cityInfoJSON[3]);
+    var cityInfoString = localStorage.getItem('description' + cityName);
+    var cityInfoJSON = JSON.parse(cityInfoString);
 
 
-       // Day 4
-    //    const info4 = day4.children[0];
-    //    info4.children[0].innerHTML = 'Temp--' + cityInfoJSON[4].t;
-    //    info4.children[1].innerHTML = 'Wind--' + cityInfoJSON[4].ws;
-    //    info4.children[2].innerHTML = 'Humidity--' + cityInfoJSON[4].h;
-       gifBackground(day4,cityInfoJSON[4]);
-   
-       // Day 5
-    //    const info5 = day5.children[0];
-    //    info5.children[0].innerHTML = 'Temp--' + cityInfoJSON[5].t;
-    //    info5.children[1].innerHTML = 'Wind--' + cityInfoJSON[5].ws;
-    //    info5.children[2].innerHTML = 'Humidity--' + cityInfoJSON[5].h;
-       gifBackground(day5,cityInfoJSON[5]);
-   
+
+
+    // I will refractor this
+    // Day 0
+
+    inputDayInfo(day0, cityInfoJSON[0], true);
+    inputDayInfo(day1, cityInfoJSON[1], false);
+    inputDayInfo(day2, cityInfoJSON[2], false);
+    inputDayInfo(day3, cityInfoJSON[3], false);
+    inputDayInfo(day4, cityInfoJSON[4], false);
+    inputDayInfo(day5, cityInfoJSON[5], false);
+
 }
 
 function getapi() {
@@ -189,7 +148,7 @@ function getapi() {
                 .then(function (data) {
                     // Day 0 (today) 
                     var temperature = data['list'];
-                    console.log(temperature);
+
 
                     // Donohue Issue 1: For each or arrow method
                     for (let dayIndex = 0; dayIndex < 6; dayIndex++) {
@@ -198,7 +157,7 @@ function getapi() {
 
                         // Get Relavant Information
                         const oneDayForecast = {
-                            d: currentDay.dt,
+                            d: moment.toDate(currentDay.dt),
                             t: ((currentDay['main'].temp - 273.15) * 9 / 5 + 32).toFixed(2),
                             ws: currentDay['wind'].speed,
                             h: currentDay['main'].humidity,
@@ -206,22 +165,20 @@ function getapi() {
                         }
                         fiveDayForecast = fiveDayForecast.concat(oneDayForecast);
 
-
-                        console.log(currentDay['weather']);
                     }
 
-                    console.log(fiveDayForecast);
+
                     // Display Information
                     const weatherInfo = JSON.stringify(fiveDayForecast)
                     storeCityWeather(cityName, weatherInfo);
-                    htmlDOMManipulation()
+                    htmlDOMManipulation();
 
                 });
 
 
         });
 
-    return fiveDayForecast;
+
 }
 
 
