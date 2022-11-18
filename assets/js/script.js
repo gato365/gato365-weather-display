@@ -7,7 +7,7 @@ const apiKey = '726ac812a8b92daf497a98559b26b3fc'
 var cityName = document.querySelector('#cityName');
 var submitBtn = document.querySelector('#submitBtn');
 var requestUrl;
-var fiveDayForecast = [];
+
 var day0 = document.querySelector('#day-0');
 var day1 = document.querySelector('#day-1');
 var day2 = document.querySelector('#day-2');
@@ -50,9 +50,11 @@ submitBtn.addEventListener("click", function (event) {
     var newCityName = cityName.value;
     day0.innerHTML = newCityName;
     searchedCities = searchedCities.concat(newCityName);
+    
     requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + newCityName + '&limit=5&appid=' + apiKey;
     getApi();
-    displayPastSearches();
+    
+    displayPastSearches(newCityName);
 });
 
 
@@ -125,8 +127,8 @@ function htmlDOMManipulation() {
 // -----------------Function Definitions--------------------
 
 function retrievePastSearches(cityName) {
-    var cityWeather = localStorage.getItem('description' + cityName);
-    descriptionTask.value = descripIndex;
+    // var cityWeather = localStorage.getItem('description' + cityName);
+    // descriptionTask.value = descripIndex;
 
 }
  
@@ -140,19 +142,19 @@ function retrievePastSearches(cityName) {
 // Output: NA
 // Notes: NA
 // -----------------Function Definitions--------------------
-function displayPastSearches() {
+function displayPastSearches(cityName) {
 
-    let numberCities = searchedCities.length;
-    if (numberCities > 0) {
-        // Create Section and button based on
-        for (let cityIndex = 0; cityIndex < numberCities; cityIndex++) {
+
+
+
+        
 
             var buttonCity = document.createElement('button');
-            buttonCity.setAttribute('class', searchedCities[cityIndex] + ' cityBtn' );
+            buttonCity.setAttribute('class', 'cityBtn');
+            buttonCity.innerHTML = cityName;
             searchesContainer.append(buttonCity);
-        }
+        
 
-    }
 }
 
 
@@ -189,6 +191,7 @@ function getApi() {
             // Creates URL LL
             var requestUrlLL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
 
+            
 
 
             fetch(requestUrlLL)
@@ -199,6 +202,7 @@ function getApi() {
                 .then(function (data) {
                     // Day 0 (today) 
                     var temperature = data['list'];
+                    var fiveDayForecast = [];
 
 
                     // Donohue Issue 1: For each or arrow method
@@ -215,7 +219,7 @@ function getApi() {
                             weather: currentDay['weather'][0].main.toLowerCase()
                         }
                         fiveDayForecast = fiveDayForecast.concat(oneDayForecast);
-
+                        
 
 
                     }
