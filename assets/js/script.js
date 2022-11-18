@@ -48,12 +48,12 @@ function storeCityWeather(cityName, weatherInfo) {
 submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
     var newCityName = cityName.value;
-    day0.innerHTML = newCityName;
+    
     searchedCities = searchedCities.concat(newCityName);
-    
+
     requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + newCityName + '&limit=5&appid=' + apiKey;
-    getApi();
-    
+    getApi(newCityName);
+
     displayPastSearches(newCityName);
 });
 
@@ -104,7 +104,8 @@ function inputDayInfo(currentDay, currentWeather, isCurrentDay) {
 // Output: NA
 // Notes: NA
 // -----------------Function Definitions--------------------
-function htmlDOMManipulation() {
+function htmlDOMManipulation(cityName) {
+    
     var cityInfoString = localStorage.getItem('description' + cityName);
     var cityInfoJSON = JSON.parse(cityInfoString);
     inputDayInfo(day0, cityInfoJSON[0], true);
@@ -113,29 +114,15 @@ function htmlDOMManipulation() {
     inputDayInfo(day3, cityInfoJSON[3], false);
     inputDayInfo(day4, cityInfoJSON[4], false);
     inputDayInfo(day5, cityInfoJSON[5], false);
+    day0.innerHTML = cityName;
 }
+
+
 
 // -----------------Function Definitions--------------------
 // Author: Immanuel Williams PhD 
-// Date Created: 11/15/2022
-// Date Modified: 11/15/2022
-// Name: retrievePastSearches
-// Purpose: Retrieves a city info from localstorage
-// Input: cityName
-// Output: NA
-// Notes: NA
-// -----------------Function Definitions--------------------
-
-function retrievePastSearches(cityName) {
-    // var cityWeather = localStorage.getItem('description' + cityName);
-    // descriptionTask.value = descripIndex;
-
-}
- 
-// -----------------Function Definitions--------------------
-// Author: Immanuel Williams PhD 
-// Date Created: 11/15/2022
-// Date Modified: 11/15/2022
+// Date Created: 11/18/2022
+// Date Modified: 11/18/2022
 // Name: displayPastSearches
 // Purpose: Displays a list a past Searches
 // Input: cityName
@@ -143,17 +130,21 @@ function retrievePastSearches(cityName) {
 // Notes: NA
 // -----------------Function Definitions--------------------
 function displayPastSearches(cityName) {
+    var newCityName = cityName;
 
+    // Create Button
+    var buttonCity = document.createElement('button');
+    buttonCity.setAttribute('class', 'cityBtn');
+    buttonCity.innerHTML = newCityName;
+    searchesContainer.append(buttonCity);
 
+    // Button Listener
+    buttonCity.addEventListener("click", function () {
+        var cityName = newCityName;
+        htmlDOMManipulation(cityName);
 
-
-        
-
-            var buttonCity = document.createElement('button');
-            buttonCity.setAttribute('class', 'cityBtn');
-            buttonCity.innerHTML = cityName;
-            searchesContainer.append(buttonCity);
-        
+        console.log(cityName);
+    });
 
 }
 
@@ -169,7 +160,7 @@ function displayPastSearches(cityName) {
 // Output: NA
 // Notes: NA
 // -----------------Function Definitions--------------------
-function getApi() {
+function getApi(cityName) {
 
     fetch(requestUrl)
 
@@ -191,7 +182,7 @@ function getApi() {
             // Creates URL LL
             var requestUrlLL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latInfo + '&lon=' + lonInfo + '&appid=' + apiKey;
 
-            
+
 
 
             fetch(requestUrlLL)
@@ -219,16 +210,17 @@ function getApi() {
                             weather: currentDay['weather'][0].main.toLowerCase()
                         }
                         fiveDayForecast = fiveDayForecast.concat(oneDayForecast);
-                        
+
 
 
                     }
 
 
                     // Display Information
-                    const weatherInfo = JSON.stringify(fiveDayForecast)
+                    const weatherInfo = JSON.stringify(fiveDayForecast);
+                    console.log(cityName);
                     storeCityWeather(cityName, weatherInfo);
-                    htmlDOMManipulation();
+                    htmlDOMManipulation(cityName);
 
                 });
 
