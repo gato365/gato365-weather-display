@@ -2,7 +2,7 @@
 
 
 
-// Define
+// Specify Variables
 const apiKey = '726ac812a8b92daf497a98559b26b3fc'
 var cityName = document.querySelector('#cityName');
 var submitBtn = document.querySelector('#submitBtn');
@@ -14,8 +14,8 @@ var day2 = document.querySelector('#day-2');
 var day3 = document.querySelector('#day-3');
 var day4 = document.querySelector('#day-4');
 var day5 = document.querySelector('#day-5');
-
-
+var searchesContainer = document.querySelector('#previous-searches');
+var searchedCities = [];
 
 // -----------------Function Definitions--------------------
 // Author: Immanuel Williams PhD 
@@ -38,7 +38,7 @@ function storeCityWeather(cityName, weatherInfo) {
 // -----------------Function Definitions--------------------
 // Author: Immanuel Williams PhD 
 // Date Created: 11/16/2022
-// Date Modified: 11/16/2022
+// Date Modified: 11/18/2022
 // Name: submitBtn
 // Purpose: Button Gets City info from User 
 // Input: (Click)
@@ -48,12 +48,11 @@ function storeCityWeather(cityName, weatherInfo) {
 submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
     var newCityName = cityName.value;
-    
     day0.innerHTML = newCityName;
+    searchedCities = searchedCities.concat(newCityName);
     requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + newCityName + '&limit=5&appid=' + apiKey;
-    console.log(newCityName+'2');
     getApi();
-    console.log(newCityName+'3');
+    
 });
 
 
@@ -114,11 +113,35 @@ function htmlDOMManipulation() {
     inputDayInfo(day5, cityInfoJSON[5], false);
 }
 
-
 // -----------------Function Definitions--------------------
 // Author: Immanuel Williams PhD 
 // Date Created: 11/15/2022
 // Date Modified: 11/15/2022
+// Name: retrievePastSearches
+// Purpose: Displays a list a past Searches
+// Input: cityName
+// Output: NA
+// Notes: NA
+// -----------------Function Definitions--------------------
+
+// function retrievePastSearches(cityName) {
+//     var cityWeather = localStorage.getItem('description' + cityName);
+//     descriptionTask.value = descripIndex;
+
+// }
+
+
+// function displayPastSearches(){
+
+//     var sectionTask = document.createElement('section');
+// }
+
+
+
+// -----------------Function Definitions--------------------
+// Author: Immanuel Williams PhD 
+// Date Created: 11/15/2022
+// Date Modified: 11/18/2022
 // Name: getApi
 // Purpose: Gets Information from Open Weather based on user's city inpu
 // Input: NA
@@ -165,7 +188,7 @@ function getApi() {
 
 
                         // Get Relavant Information
-                        const oneDayForecast = { 
+                        const oneDayForecast = {
                             d: currentDay.dt,
                             t: ((currentDay['main'].temp - 273.15) * 9 / 5 + 32).toFixed(2),
                             ws: currentDay['wind'].speed,
@@ -175,7 +198,7 @@ function getApi() {
                         fiveDayForecast = fiveDayForecast.concat(oneDayForecast);
 
 
-                
+
                     }
 
 
@@ -190,7 +213,7 @@ function getApi() {
         })
         .catch(function (error) {
             console.error(error);
-          });
+        });
 
 
 }
