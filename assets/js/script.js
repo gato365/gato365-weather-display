@@ -2,11 +2,10 @@
 
 
 
-// Testing URL and API Ability
+// Define
 const apiKey = '726ac812a8b92daf497a98559b26b3fc'
-var tmpcityName = document.querySelector('#cityName');
+var cityName = document.querySelector('#cityName');
 var submitBtn = document.querySelector('#submitBtn');
-var cityName;
 var requestUrl;
 var fiveDayForecast = [];
 var day0 = document.querySelector('#day-0');
@@ -47,7 +46,7 @@ function storeCityWeather(cityName, weatherInfo) {
 // Notes: NA
 // -----------------Function Definitions--------------------
 submitBtn.addEventListener("click", function () {
-    cityName = tmpcityName.value;
+    cityName = cityName.value;
     console.log(cityName);
     day0.innerHTML = cityName;
     requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=' + apiKey;

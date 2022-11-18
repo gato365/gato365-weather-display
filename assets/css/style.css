@@ -1,4 +1,4 @@
-
+/* 
 html{
     margin: 0;
     height: 100%;
@@ -8,14 +8,23 @@ body{
  
     height:75%;
     width: 100%;
+} */
+
+
+html,
+body {
+    height: 100%;
+    margin: 0;
 }
 
 #jumbotron{
+    margin-bottom: 10px;
     height: 50px;
     background-image: linear-gradient(to right, rgba(57, 57, 166, 0), rgb(27, 17, 74));
     color: white;
     font-size: 35px;
     text-align: center;
+
 }
 
 #enter-cities {
@@ -39,8 +48,9 @@ body{
 
 
 section{
+    border-top: 10px;
     background-color: rgb(149, 195, 149);
-    width: 100%;
+    width: 99%;
     height: 300px;
     
 }
@@ -49,7 +59,8 @@ section{
 #five-day{
     display: flex;
     flex-direction:  row;
-    justify-content: space-between;
+    justify-content:  center;
+    gap: 15px;
     list-style-type: none;  
 }
 
@@ -57,7 +68,7 @@ section{
     /* background-color  : red; */
     color: #2589bd;
     border: 1px solid black;
-    font-size: 20px;
+    font-size: 32px;
     width: 150px;
     height: 200px; 
 }
@@ -68,8 +79,9 @@ section{
     row-gap: 15px;
     padding-top: 40px;
     text-align: left;
-    color: white;
-    font-size: 12px;
+    color: black;
+    text-align: left;
+    font-size: 16px;
     list-style-type: none; 
 }
 
