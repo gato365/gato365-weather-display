@@ -52,7 +52,7 @@ submitBtn.addEventListener("click", function (event) {
     searchedCities = searchedCities.concat(newCityName);
     requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + newCityName + '&limit=5&appid=' + apiKey;
     getApi();
-    
+    displayPastSearches();
 });
 
 
@@ -118,23 +118,42 @@ function htmlDOMManipulation() {
 // Date Created: 11/15/2022
 // Date Modified: 11/15/2022
 // Name: retrievePastSearches
-// Purpose: Displays a list a past Searches
+// Purpose: Retrieves a city info from localstorage
 // Input: cityName
 // Output: NA
 // Notes: NA
 // -----------------Function Definitions--------------------
 
-// function retrievePastSearches(cityName) {
-//     var cityWeather = localStorage.getItem('description' + cityName);
-//     descriptionTask.value = descripIndex;
+function retrievePastSearches(cityName) {
+    var cityWeather = localStorage.getItem('description' + cityName);
+    descriptionTask.value = descripIndex;
 
-// }
+}
+ 
+// -----------------Function Definitions--------------------
+// Author: Immanuel Williams PhD 
+// Date Created: 11/15/2022
+// Date Modified: 11/15/2022
+// Name: displayPastSearches
+// Purpose: Displays a list a past Searches
+// Input: cityName
+// Output: NA
+// Notes: NA
+// -----------------Function Definitions--------------------
+function displayPastSearches() {
 
+    let numberCities = searchedCities.length;
+    if (numberCities > 0) {
+        // Create Section and button based on
+        for (let cityIndex = 0; cityIndex < numberCities; cityIndex++) {
 
-// function displayPastSearches(){
+            var buttonCity = document.createElement('button');
+            buttonCity.setAttribute('class', searchedCities[cityIndex] + ' cityBtn' );
+            searchesContainer.append(buttonCity);
+        }
 
-//     var sectionTask = document.createElement('section');
-// }
+    }
+}
 
 
 

@@ -17,7 +17,7 @@ body {
     margin: 0;
 }
 
-#jumbotron{
+#jumbotron {
     margin-bottom: 10px;
     height: 50px;
     background-image: linear-gradient(to right, rgba(57, 57, 166, 0), rgb(27, 17, 74));
@@ -39,50 +39,71 @@ body {
 }
 
 
-#section-container{
+#section-container {
     display: flex;
-    flex-direction:  column;
+    flex-direction: column;
     justify-content: space-between;
     row-gap: 15px;
 }
 
 
-section{
+.weather-display {
     border-top: 10px;
     background-color: rgb(149, 195, 149);
     width: 99%;
     height: 300px;
-    
+
 }
 
 
-#five-day{
+#five-day {
     display: flex;
-    flex-direction:  row;
-    justify-content:  center;
+    flex-direction: row;
+    justify-content: center;
     gap: 15px;
-    list-style-type: none;  
+    list-style-type: none;
 }
 
-.card{
+.card {
     /* background-color  : red; */
     color: #2589bd;
     border: 1px solid black;
     font-size: 32px;
     width: 150px;
-    height: 200px; 
+    height: 200px;
 }
 
-.cityStat{
+.cityStat {
     display: flex;
-    flex-direction:  column;
+    flex-direction: column;
     row-gap: 15px;
     padding-top: 40px;
     text-align: left;
     color: black;
     text-align: left;
     font-size: 16px;
-    list-style-type: none; 
+    list-style-type: none;
 }
 
 
+
+#previous-searches {
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+}
+
+.cityBtn {
+    border-left: 1px solid black;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: black;
+    color: white;
+    width: 80%;
+    height: 20px;
+
+    font-size: 12px;
+    text-align: center;
+}
