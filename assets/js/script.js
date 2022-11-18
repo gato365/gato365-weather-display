@@ -48,7 +48,7 @@ function storeCityWeather(cityName, weatherInfo) {
 submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
     var newCityName = cityName.value;
-    
+
     searchedCities = searchedCities.concat(newCityName);
 
     requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + newCityName + '&limit=5&appid=' + apiKey;
@@ -105,7 +105,7 @@ function inputDayInfo(currentDay, currentWeather, isCurrentDay) {
 // Notes: NA
 // -----------------Function Definitions--------------------
 function htmlDOMManipulation(cityName) {
-    
+
     var cityInfoString = localStorage.getItem('description' + cityName);
     var cityInfoJSON = JSON.parse(cityInfoString);
     inputDayInfo(day0, cityInfoJSON[0], true);
@@ -188,6 +188,14 @@ function getApi(cityName) {
             fetch(requestUrlLL)
 
                 .then(function (response) {
+
+                    // Check for Error
+                    if (!response.ok) {
+                       
+                        throw response.json();
+                    }
+                    
+
                     return response.json();
                 })
                 .then(function (data) {
