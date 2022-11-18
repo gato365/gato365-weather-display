@@ -45,12 +45,15 @@ function storeCityWeather(cityName, weatherInfo) {
 // Output: NA
 // Notes: NA
 // -----------------Function Definitions--------------------
-submitBtn.addEventListener("click", function () {
-    cityName = cityName.value;
-    console.log(cityName);
-    day0.innerHTML = cityName;
-    requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=5&appid=' + apiKey;
-    getapi()
+submitBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    var newCityName = cityName.value;
+    
+    day0.innerHTML = newCityName;
+    requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + newCityName + '&limit=5&appid=' + apiKey;
+    console.log(newCityName+'2');
+    getApi();
+    console.log(newCityName+'3');
 });
 
 
@@ -116,13 +119,13 @@ function htmlDOMManipulation() {
 // Author: Immanuel Williams PhD 
 // Date Created: 11/15/2022
 // Date Modified: 11/15/2022
-// Name: getapi
+// Name: getApi
 // Purpose: Gets Information from Open Weather based on user's city inpu
 // Input: NA
 // Output: NA
 // Notes: NA
 // -----------------Function Definitions--------------------
-function getapi() {
+function getApi() {
 
     fetch(requestUrl)
 
@@ -162,7 +165,7 @@ function getapi() {
 
 
                         // Get Relavant Information
-                        const oneDayForecast = {
+                        const oneDayForecast = { 
                             d: currentDay.dt,
                             t: ((currentDay['main'].temp - 273.15) * 9 / 5 + 32).toFixed(2),
                             ws: currentDay['wind'].speed,
@@ -172,7 +175,7 @@ function getapi() {
                         fiveDayForecast = fiveDayForecast.concat(oneDayForecast);
 
 
-                        console.log(oneDayForecast);
+                
                     }
 
 
@@ -184,7 +187,10 @@ function getapi() {
                 });
 
 
-        });
+        })
+        .catch(function (error) {
+            console.error(error);
+          });
 
 
 }
