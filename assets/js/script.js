@@ -84,10 +84,10 @@ function inputDayInfo(currentDay, currentWeather, isCurrentDay) {
         currentDay.children[3].innerHTML = 'Weather: ' + currentWeather.weather;
         // Add Image based on predicted weather
         if (['thunderstorm', 'rain', 'snow', 'clouds', 'fog'].includes(currentWeather.weather)) {
-            currentDay.style.backgroundImage =
+            currentDay.children[4].style.backgroundImage =
                 `url('https://mdbgo.io/ascensus/mdb-advanced/img/${currentWeather.weather}.gif')`;
         } else {
-            currentDay.style.backgroundImage =
+            currentDay.children[4].style.backgroundImage =
                 `url('https://mdbgo.io/ascensus/mdb-advanced/img/clear.gif')`;
         }
     }
