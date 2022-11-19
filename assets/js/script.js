@@ -51,7 +51,7 @@ submitBtn.addEventListener("click", function (event) {
 
     searchedCities = searchedCities.concat(newCityName);
 
-    requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + newCityName + '&limit=5&appid=' + apiKey;
+    requestUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + newCityName + '&limit=5&appid=' + apiKey;
     getApi(newCityName);
 
     displayPastSearches(newCityName);
