@@ -114,7 +114,9 @@ function htmlDOMManipulation(cityName) {
     inputDayInfo(day3, cityInfoJSON[3], false);
     inputDayInfo(day4, cityInfoJSON[4], false);
     inputDayInfo(day5, cityInfoJSON[5], false);
+    var x = document.createElement("H1");
     day0.innerHTML = cityName;
+    // x.appendChild(day0);
 }
 
 

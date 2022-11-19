@@ -47,14 +47,21 @@ body {
 }
 
 
-.weather-display {
+#weather-display-1 {
     border-top: 10px;
     background-color: rgb(149, 195, 149);
     width: 99%;
-    height: 400px;
+    height: 200px;
 
 }
 
+#weather-display-2 {
+    border-top: 10px;
+    background-color: rgb(149, 195, 149);
+    width: 99%;
+    height: 475px;
+
+}
 
 #five-day {
     display: flex;
@@ -70,7 +77,7 @@ body {
     border: 1px solid black;
     font-size: 32px;
     width: 17%;
-    height: 90%;
+    height: 80%;
 }
 
 .cityStat {
